@@ -7,7 +7,7 @@ use \PDO as PDO;
 
 class DbAccess extends PDO {
 	
-		
+		 
 	private $hostname; 	// @var string
 	private $database;	// @var string
 	private $username;	// @var string
@@ -45,13 +45,13 @@ class DbAccess extends PDO {
 				# MySQL with PDO_MYSQL  
 				$this->dbh = new PDO("mysql:host=$this->hostname;dbname=$this->database", $this->username, $this->password );
 			} 
-			elseif ($this->db_engine === 'sqllite'){
+			elseif ($this->db_engine === 'sqlite'){
 				# SQLlite with PDO_SQLlite
 				$this->dbh = new PDO('sqlite:'.$this->db_file);
 			}//END if/else 
 			
-			#Set Error Mode
-			$this->dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
+			//Set Error Mode
+			//	$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 				
 		} catch(\PDOException $e) {
 		    throw new \RuntimeException( 'Failed to establish database connection:'. $e->getMessage() );
@@ -94,13 +94,17 @@ class DbAccess extends PDO {
 	*/  
 	public function update($query) {
 		try {
-			$statement = $this->dbh->prepare($query)
-			$statement->execute($data); 			return $updateResult;
+			$statement = $this->dbh->prepare($query);
+			$updateResult = $statement->execute($data); 
+			/* return $updateResult; */			
 		} catch(\PDOException $e) {
 		    die( 'Failed to update record:'. $e->getMessage() );
 		}// END Try/Catch
+		
 	}//END function update
-	
+
+
+
 	// execute the delete sql statement. It should throw an exception if the query fails to execute.
 	public function delete($query) {
 		try {

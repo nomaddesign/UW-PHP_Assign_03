@@ -15,10 +15,12 @@
     "require": {
         "phpunit/phpunit": "3.7.10",
         "php": ">=5.3.1",
-        "guzzle/guzzle": "3.3.0"
+        "guzzle/guzzle": "3.3.0",
+        "jayzeng/config-reader": "dev-master"
     },
     "autoload": {
-        "classmap": ["Src/"]
+        "classmap": ["Src/","Tests/","Tests/manual_tests"]
+        
     },
     "config": {
         "vendor-dir" : "Vendors",
